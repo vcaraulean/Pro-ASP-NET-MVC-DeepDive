@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Web.Mvc;
 
 namespace Ch13.UrlsAndRoutes.Tests
 {
@@ -79,10 +80,18 @@ namespace Ch13.UrlsAndRoutes.Tests
 
             TestRouteMatch("~/", "Home", "Index");
             TestRouteMatch("~/Customer", "Customer", "Index", new { id = "DefaultId" });
+        }
 
-            TestRouteMatch("~/Shop/index", "Home", "Index");
+        [TestMethod]
+        public void TestOutcomingRoutes()
+        {
+            var routes = new RouteCollection();
+            RouteConfig.RegisterRoutes(routes);
+            var context = new RequestContext(CreateHttpContext(), new RouteData());
 
-            TestRouteMatch("~/Admin/Index/Segment/delete", "Admin", "Index", new { id = "Segment", catchall="delete"});
+            var result = UrlHelper.GenerateUrl(null, "Index", "Home", null, routes, context, true);
+
+            Assert.AreEqual("/App/DoIndex", result);
         }
     }
 }

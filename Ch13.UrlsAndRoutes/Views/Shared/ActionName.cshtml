@@ -11,5 +11,20 @@
 <body>
     <div>The controller is: @ViewBag.Controller</div>
     <div>The action is: @ViewBag.Action</div>
+    <div>
+        @Html.ActionLink("This is an outgoing URL", "CustomVariable", new { id = "hi there"})
+    </div>
+    <div>
+        @Html.ActionLink("Targeting another controller", "Index", "Admin")
+    </div>
+    <div>
+        This is an URL:
+        @Url.Action("Index", "Home", new { id = "new_id"})
+    </div>
+
+    <div>
+        This is a legacy URL:
+        @Html.ActionLink("Click me", "GetLegacyURL", new { legacyURL = "~/articles/windows.html" })
+    </div>
 </body>
 </html>
