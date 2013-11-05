@@ -11,13 +11,18 @@ namespace Ch13.UrlsAndRoutes
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //var route = new Route("{controller}/{action}", new MvcRouteHandler());
+            //routes.Add("myRoute", route);
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            routes.MapRoute("ShopSchema2", "Shop/OldAction", new { controller = "Home", action = "index" });
+
+            routes.MapRoute("ShopSchema", "Shop/{action}", new { controller = "Home"});
+
+            routes.MapRoute("", "X{controller}/{action}");
+
+            routes.MapRoute("myRoute", "{controller}/{action}/{id}/{*catchall}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute("", "Public/{controller}/{action}", new { controller = "Home", action = "Index" });
         }
     }
 }
