@@ -18,7 +18,7 @@ namespace Ch13.UrlsAndRoutes
 
             routes.Add(new LegacyRoute("~/articles/windows.html", "~/old/classes"));
 
-            routes.MapRoute("myRoute", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute("myRoute", "{controller}/{action}", null, new []{"Ch13.UrlsAndRoutes.Controllers"});
         }
     }
 }
