@@ -1,0 +1,4 @@
+﻿@using HelperMethods.Models
+@model HelperMethods.Models.Role
+
+@Html.DropDownListFor(x => x, new SelectList(Enum.GetValues(typeof(Role))), Model.ToString())

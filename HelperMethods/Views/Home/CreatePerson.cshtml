@@ -1,27 +1,40 @@
-﻿@using HelperMethods.Models
-@model HelperMethods.Models.Person
+﻿@model HelperMethods.Models.Person
 @{
     ViewBag.Title = "CreatePerson";
+    Html.EnableClientValidation(false);
 }
 
-<h2>Create person</h2>
-
-@using (Html.BeginForm()) {
+<h2>Create person: @Html.LabelForModel()</h2>
+@using (Html.BeginForm())
+{
+    <div class="column">
+        @Html.EditorForModel()
+    </div>
+    <div class="column">
+        @Html.EditorFor(x => x.Address)
+    </div>
+    <input type="submit" value="Submit"/>
+}
+@*@using (Html.BeginForm()) {
     <div class="dataElem">
         <label>PersonID</label>
         @Html.TextBox("personId", @Model.PersonId)
     </div>
     <div class="dataElem">
         <label>First Name</label>
-        @Html.TextBoxFor(x => x.FirstName)
+        @Html.EditorFor(x => x.FirstName)
     </div>
     <div class="dataElem">
         <label>Last Name</label>
-        @Html.TextBox("LastName")
+        @Html.Editor("LastName")
     </div>
     <div class="dataElem">
         <label>Role</label>
-        @Html.DropDownListFor(x => x.Role, new SelectList(Enum.GetNames(typeof(Role))))
+        @Html.EditorFor(x => x.Role)
+    </div>
+    <div class="dataElem">
+        <label>Birthday</label>
+        @Html.EditorFor(x => x.Birthday)
     </div>
     <input type="submit" value="Submit"/>
-}
+}*@
