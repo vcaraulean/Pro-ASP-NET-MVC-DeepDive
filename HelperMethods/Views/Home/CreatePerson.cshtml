@@ -1,0 +1,27 @@
+﻿@using HelperMethods.Models
+@model HelperMethods.Models.Person
+@{
+    ViewBag.Title = "CreatePerson";
+}
+
+<h2>Create person</h2>
+
+@using (Html.BeginForm()) {
+    <div class="dataElem">
+        <label>PersonID</label>
+        @Html.TextBox("personId", @Model.PersonId)
+    </div>
+    <div class="dataElem">
+        <label>First Name</label>
+        @Html.TextBoxFor(x => x.FirstName)
+    </div>
+    <div class="dataElem">
+        <label>Last Name</label>
+        @Html.TextBox("LastName")
+    </div>
+    <div class="dataElem">
+        <label>Role</label>
+        @Html.DropDownListFor(x => x.Role, new SelectList(Enum.GetNames(typeof(Role))))
+    </div>
+    <input type="submit" value="Submit"/>
+}
