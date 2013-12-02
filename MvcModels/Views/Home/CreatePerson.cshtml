@@ -1,0 +1,24 @@
+﻿@model MvcModels.Models.Person
+
+@{
+    ViewBag.Title = "CreatePerson";
+}
+
+<h2>CreatePerson</h2>
+
+@using (Html.BeginForm("DisplaySummary", "Home"))
+{
+    <div>@Html.LabelFor(x => x.PersonId) @Html.EditorFor(x => x.PersonId)</div>
+    <div>@Html.LabelFor(x => x.LastName) @Html.EditorFor(x => x.LastName)</div>
+    <div>@Html.LabelFor(x => x.FirstName) @Html.EditorFor(x => x.FirstName)</div>
+    <div>@Html.LabelFor(x => x.Role) @Html.EditorFor(x => x.Role)</div>
+    <div>
+        @Html.LabelFor(x => x.Address.City)
+        @Html.EditorFor(x => x.Address.City)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Address.Country)
+        @Html.EditorFor(x => x.Address.Country)
+    </div>
+    <button type="submit">Submit</button>
+}
