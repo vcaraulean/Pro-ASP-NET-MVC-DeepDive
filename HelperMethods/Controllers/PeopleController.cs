@@ -23,19 +23,31 @@ namespace HelperMethods.Controllers
             return View();
         }
 
-        public ActionResult GetPeople()
+        public ActionResult GetPeople(string selectedRole = "All")
         {
-            return View(personData);
+            return View((object)selectedRole);
         }
 
-        [HttpPost]
-        public ActionResult GetPeople(string selectedRole)
+        public PartialViewResult GetPeopleData(string selectedRole = "All")
         {
-            if (selectedRole == null || selectedRole == "ALL")
-                return View(personData);
+            var data = GetData(selectedRole);
+            return PartialView(data);
+        }
 
-            var selected = (Role) Enum.Parse(typeof(Role), selectedRole);
-            return View(personData.Where(p => p.Role == selected));
+        public JsonResult GetPeopleDataJson(string selectedRole = "All")
+        {
+            return Json(GetData(selectedRole), JsonRequestBehavior.AllowGet);
+        }
+
+        private IEnumerable<Person> GetData(string selectedRole)
+        {
+            IEnumerable<Person> data = personData;
+            if (selectedRole != "All")
+            {
+                var selected = (Role) Enum.Parse(typeof (Role), selectedRole);
+                data = personData.Where(p => p.Role == selected);
+            }
+            return data;
         }
     }
 }
