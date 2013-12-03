@@ -1,0 +1,36 @@
+﻿@model ClientFeatures.Models.Appointment
+
+@{
+    ViewBag.Title = "Make a booking";
+    var ajaxOptions = new AjaxOptions
+    {
+        OnSuccess = "processResponse",
+    };
+}
+
+<h4>Book an appointment</h4>
+
+@section scripts
+{
+    <script src="~/Scripts/MakeBooking.js" type="text/javascript"></script>
+}
+
+<div id="formDiv" class="visible">
+    @using (Ajax.BeginForm(ajaxOptions))
+    {
+        @Html.ValidationSummary(true)
+        <p>@Html.ValidationMessageFor(x => x.ClientName)</p>
+        <p>Your name: @Html.EditorFor(x => x.ClientName)</p>
+        <p>@Html.ValidationMessageFor(x => x.Date)</p>
+        <p>Appointment date: @Html.EditorFor(x => x.Date)</p>
+        <p>@Html.ValidationMessageFor(x => x.TermsAccepted)</p>
+        <p>@Html.EditorFor(x => x.TermsAccepted) I accept the terms & conditions</p>
+        <input type="submit" value="Make booking"/>
+    }
+</div>
+<div id="successDiv" class="hidden">
+    <h4>Your appointment is confirmed!</h4>
+    <p>Your name is: <b id="successClientName"></b></p>
+    <p>The date of your appointment is: <b id="successDate"></b></p>
+    <button id="backButton">Back</button>
+</div>
