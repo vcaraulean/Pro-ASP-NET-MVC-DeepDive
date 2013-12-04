@@ -13,8 +13,8 @@
         <thead>
             <tr>
                 <th class="selectCol"></th>
-                <th class="nameCol"></th>
-                <th class="locationCol"></th>
+                <th class="nameCol">Name</th>
+                <th class="locationCol">Location</th>
             </tr>
         </thead>
         <tbody id="tableBody">
@@ -32,7 +32,11 @@
 <div id="addDisplay" class="display">
     <h4>Add new reservation</h4>
     @{
-        var addAjaxOptions = new AjaxOptions{};
+        var addAjaxOptions = new AjaxOptions
+        {
+            OnSuccess = "getData",
+            Url = "api/reservation",
+        };
     }
     @using (Ajax.BeginForm(addAjaxOptions))
     {
